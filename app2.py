@@ -20,7 +20,6 @@ from fastapi import FastAPI
 import streamlit as st
 from flask import Flask, render_template, request
 import re
-from googlesearch import search
 # from transformers import AutoModelForCausalLM, AutoTokenizer
 # import torch
 
@@ -37,70 +36,28 @@ serper_api_key = os.getenv("SERP_API_KEY")
 # 1. Tool for search
 
 
-# def search(query):
-#     url = "https://google.serper.dev/search"
+def search(query):
+    url = "https://google.serper.dev/search"
 
-#     payload = json.dumps({
-#         "q": query
-#     })
+    payload = json.dumps({
+        "q": query
+    })
 
-#     headers = {
-#         'X-API-KEY': serper_api_key,
-#         'Content-Type': 'application/json'
-#     }
+    headers = {
+        'X-API-KEY': serper_api_key,
+        'Content-Type': 'application/json'
+    }
 
-#     response = requests.request("POST", url, headers=headers, data=payload)
+    response = requests.request("POST", url, headers=headers, data=payload)
 
-#     print("search results: ")
-#     print(response.text)
+    print("search results: ")
+    print(response.text)
 
-#     return response.text
-
-def search_google(query):
-    num_results = 10
-    search_results = search(query, num_results=num_results, lang='en')
-    data = []
-    for url in search_results[:4]:
-        data.append(scrape_website(url))
-
-    return data
-
-
-def scrape_website(objective: str, url):
-    # Send a GET request to the website
-    response = requests.get(url)
-
-    # Check if the request was successful
-    if response.status_code == 200:
-        # Parse the HTML content using BeautifulSoup
-        soup = BeautifulSoup(response.content, 'html.parser')
-
-        # Find all the text elements in the HTML
-        text_elements = soup.find_all(text=True)
-
-        # Filter out unwanted elements (e.g., script, style, etc.)
-        legible_text = filter(is_legible, text_elements)
-
-        # Join the legible text elements into a single string
-        result = ' '.join(legible_text)
-
-        return result
-
-    # If the request was not successful, return None
-    return None
-
-
-def is_legible(element):
-    # Filter out unwanted elements based on their tag name or class
-    if element.parent.name in ['style', 'script', 'head', 'title', 'meta', '[document]']:
-        return False
-    if element.parent.name == 'a' and element.parent.get('href'):
-        return False
-    return True
+    return response.text
 
 
 # 2. Tool for scraping
-def scrapes_website(objective: str, url: str):
+def scrape_website(objective: str, url: str):
     # scrape website, and also will summarize the content based on objective if the content is too large
     # objective is the original objective & task that user give to the agent, url is the url of the website to be scraped
 

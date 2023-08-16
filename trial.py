@@ -1,67 +1,63 @@
-import os
-from dotenv import load_dotenv
-from bs4 import BeautifulSoup
+import urllib.request
+from bs4.element import Comment
 import requests
-import json
-
-load_dotenv()
-brwoserless_api_key = os.getenv("BROWSERLESS_API_KEY")
-serper_api_key = os.getenv("SERP_API_KEY")
-
-# 1. Tool for search
+from bs4 import BeautifulSoup
 
 
-def search(query):
-    url = "https://google.serper.dev/search"
+def scrape_website(url):
+    # Send a GET request to the website
+    response = requests.get(url)
 
-    payload = json.dumps({
-        "q": query
-    })
-
-    headers = {
-        'X-API-KEY': serper_api_key,
-        'Content-Type': 'application/json'
-    }
-
-    response = requests.request("POST", url, headers=headers, data=payload)
-
-    print("search results: ")
-    print(response.text)
-
-    return response.text
-
-
-# 2. Tool for scraping
-def scrape_website(objective: str, url: str):
-    # scrape website, and also will summarize the content based on objective if the content is too large
-    # objective is the original objective & task that user give to the agent, url is the url of the website to be scraped
-
-    print("Scraping website...")
-    # Define the headers for the request
-    headers = {
-        'Cache-Control': 'no-cache',
-        'Content-Type': 'application/json',
-    }
-
-    # Define the data to be sent in the request
-    data = {
-        "url": url
-    }
-
-    # Convert Python object to JSON string
-    data_json = json.dumps(data)
-
-    # Send the POST request
-    post_url = f"https://chrome.browserless.io/content?token={brwoserless_api_key}"
-    response = requests.post(post_url, headers=headers, data=data_json)
-
-    # Check the response status code
+    # Check if the request was successful
     if response.status_code == 200:
-        soup = BeautifulSoup(response.content, "html.parser")
-        text = soup.get_text()
-        print("CONTENTTTTTT:", text.encode('ascii', errors='ignore'))
+        # Parse the HTML content using BeautifulSoup
+        soup = BeautifulSoup(response.content, 'html.parser')
+
+        # Find all the text elements in the HTML
+        text_elements = soup.find_all(text=True)
+
+        # Filter out unwanted elements (e.g., script, style, etc.)
+        legible_text = filter(is_legible, text_elements)
+
+        # Join the legible text elements into a single string
+        result = ' '.join(legible_text)
+
+        return result
+
+    # If the request was not successful, return None
+    return None
 
 
-# search("Traditional Fshion trendy outfits for teen boys")
-scrape_website("generate outfit",
-               "https://modernteen.co/outfits-for-teenage-guys/")
+def is_legible(element):
+    # Filter out unwanted elements based on their tag name or class
+    if element.parent.name in ['style', 'script', 'head', 'title', 'meta', '[document]']:
+        return False
+    if element.parent.name == 'a' and element.parent.get('href'):
+        return False
+    return True
+
+
+# Example usage
+url = 'https://www.vogue.in/fashion/fashion-trends'
+legible_text = scrape_website(url)
+print(legible_text)
+
+
+# def tag_visible(element):
+#     if element.parent.name in ['style', 'script', 'head', 'title', 'meta', '[document]']:
+#         return False
+#     if isinstance(element, Comment):
+#         return False
+#     return True
+
+
+# def text_from_html(body):
+#     soup = BeautifulSoup(body, 'html.parser')
+#     texts = soup.findAll(text=True)
+#     visible_texts = filter(tag_visible, texts)
+#     return u" ".join(t.strip() for t in visible_texts)
+
+
+# html = urllib.request.urlopen(
+#     'https://www.vogue.in/fashion/fashion-trends').read()
+# print(text_from_html(html))
