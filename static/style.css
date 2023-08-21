@@ -1,20 +1,84 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap");
+
 body,
 html {
   height: 100%;
   margin: 0;
   background: rgb(44, 47, 59);
-  background: -webkit-linear-gradient(
-    to right,
-    rgb(40, 59, 34),
-    rgb(54, 60, 70),
-    rgb(32, 32, 43)
+  background-color: #08aeea;
+  background-color: #ff3cac;
+  background-image: linear-gradient(
+    225deg,
+    #ff3cac 0%,
+    #784ba0 50%,
+    #2b86c5 100%
   );
-  background: linear-gradient(
-    to right,
-    rgb(38, 51, 61),
-    rgb(50, 55, 65),
-    rgb(33, 33, 78)
-  );
+  font-family: "Nunito", sans-serif;
+}
+/* scroll bar styles */
+
+.scroll1::-webkit-scrollbar {
+  width: 5px;
+}
+
+.scroll1::-webkit-scrollbar-track {
+  background: #ddd;
+}
+
+.scroll1::-webkit-scrollbar-thumb {
+  background: #666;
+}
+
+.scroll2::-webkit-scrollbar {
+  width: 5px;
+}
+
+.scroll2::-webkit-scrollbar-thumb {
+  background: #666;
+}
+
+.scroll3::-webkit-scrollbar {
+  width: 5px;
+}
+
+.scroll3::-webkit-scrollbar-thumb {
+  background: #ddd;
+}
+
+.scroll3::-webkit-scrollbar-track {
+  background: #584fc1;
+}
+
+.scroll4::-webkit-scrollbar {
+  width: 2px;
+}
+
+.scroll4::-webkit-scrollbar-thumb {
+  background: #584fc1;
+  border-radius: 2px;
+}
+
+.scroll4::-webkit-scrollbar-track {
+  background: #1c202a;
+  border-radius: 20px;
+}
+
+.scroll5::-webkit-scrollbar {
+  width: 15px;
+}
+
+.scroll5::-webkit-scrollbar-thumb {
+  background: #666;
+}
+
+.scroll5::-webkit-scrollbar-track {
+  background: #ddd;
+}
+
+.scroll5::-webkit-scrollbar-button {
+  background: #666;
+  height: 15px;
+  border-radius: 50%;
 }
 
 .chat {
@@ -25,7 +89,7 @@ html {
 .card {
   height: 100%;
   border-radius: 15px !important;
-  background-color: rgba(0, 0, 0, 0.4) !important;
+  background-color: #1c202a !important;
 }
 .contacts_body {
   padding: 0.75rem 0 !important;
@@ -160,18 +224,22 @@ html {
   margin-top: auto;
   margin-bottom: auto;
   margin-left: 10px;
-  border-radius: 0 10px 10px 10px;
-  background-color: rgb(82, 172, 255);
-  padding: 3px 10px 10px 10px;
+  border-radius: 0 15px 15px 15px;
+  background-color: #272c39;
+  color: rgb(220, 220, 220);
+  padding: 12px 20px 20px 20px;
   position: relative;
+  max-width: 80%;
 }
 .msg_cotainer_send {
   margin-top: auto;
+  max-width: 80%;
   margin-bottom: auto;
   margin-right: 10px;
-  border-radius: 10px 0 10px 10px;
-  background-color: #58cc71;
-  padding: 3px 10px 10px 10px;
+  border-radius: 15px 0 15px 15px;
+  background-color: #584fc1;
+  color: rgb(220, 220, 220);
+  padding: 6px 20px 10px 20px;
   position: relative;
 }
 .msg_time {
@@ -231,4 +299,177 @@ html {
   .contacts_card {
     margin-bottom: 15px !important;
   }
+}
+
+a {
+  text-decoration: none;
+}
+.product-card {
+  width: 30%;
+  position: relative;
+  box-shadow: 0 2px 5px #1c202a;
+  margin: 50px auto;
+  border-radius: 15px;
+  background: #1c202a;
+}
+
+.badge {
+  position: absolute;
+  right: 10px;
+  bottom: 20px;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.product-tumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 35vh;
+  border-radius: 15px;
+  background: #f0f0f0;
+  position: relative;
+}
+
+.product-tumb img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+}
+.contain-all-cards {
+  margin: auto;
+  width: 99%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.product-details {
+  padding: 30px;
+}
+
+.product-catagory {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #ccc;
+  margin-bottom: 18px;
+}
+
+.product-details h4 a {
+  font-weight: 700;
+  font-family: "Nunito", sans-serif;
+  display: block;
+  font-size: 20px;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.product-details h4 a:hover {
+  color: #b3acfc;
+}
+
+.product-details p {
+  font-size: 15px;
+  line-height: 22px;
+  margin-bottom: 18px;
+  color: #999;
+}
+
+.product-bottom-details {
+  overflow: hidden;
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+}
+
+.product-bottom-details div {
+  float: left;
+  width: 50%;
+}
+
+.product-price {
+  font-size: 18px;
+  color: #b3acfc;
+  font-weight: 600;
+}
+
+.product-price small {
+  font-size: 80%;
+  font-weight: 400;
+  text-decoration: line-through;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.product-links {
+  text-align: right;
+}
+
+.product-links a {
+  display: inline-block;
+  margin-left: 5px;
+  color: #e1e1e1;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+.product-links a:hover {
+  color: #b3acfc;
+}
+
+/* CSS */
+.button-27 {
+  appearance: none;
+  background-color: #1c202a;
+  border: 2px solid #1c202a;
+  border-radius: 15px;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Nunito", sans-serif;
+  font-size: 1.2rem;
+  color: #e1e1e1;
+  font-weight: 800;
+  margin: 0;
+  min-height: 40px;
+  min-width: 0;
+  outline: none;
+  padding: 5px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+  will-change: transform;
+}
+
+.button-27:disabled {
+  pointer-events: none;
+}
+
+.button-27:hover {
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.button-27:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+.select_profile {
+  width: 100%;
+  text-align: center;
+  color: #1c202a;
+  position: fixed;
+  font-size: smaller;
+  bottom: -5px;
 }

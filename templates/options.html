@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cover Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="options.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='options.css')}}"
+    />
+    <script>
+      $(document).ready(function () {
+        // When the select button is clicked
+        $("#submit-button").click(function () {
+          // Get the selected option value
+          var selectedValue = $('input[name="radio-card"]:checked').attr("id");
+
+          // Redirect to the desired route with the selected value as a query parameter
+          window.location.href = "/chat?value=" + selectedValue;
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="top-text-wrapper">
+        <img
+          src="https://i.ibb.co/xMM9mDt/Safeimagekit-resized-img-min.png"
+          class="header_img"
+        />
+        <h1 style="font-size: 30px; font-weight: 500; margin-left: 20px;">
+          Fashion Outfit <br />
+          Generator
+        </h1>
+      </div>
+      <br />
+      <div class="grid-wrapper grid-col-auto">
+        <label for="radio-card-1" class="radio-card">
+          <input type="radio" name="radio-card" id="radio-card-1" checked />
+          <div class="card-content-wrapper">
+            <span class="check-icon"></span>
+            <div class="card-content">
+              <h1>mahuya</h1>
+              <h5>
+                Mahuya is a 30 year old woman with a taste in indian traditional
+                clothes. Her purchase History shows that she often buys sarees
+                and kurtas, and buys red colored clothes often.
+              </h5>
+            </div>
+          </div>
+        </label>
+        <!-- /.radio-card -->
+
+        <label for="radio-card-2" class="radio-card">
+          <input type="radio" name="radio-card" id="radio-card-2" />
+          <div class="card-content-wrapper">
+            <span class="check-icon"></span>
+            <div class="card-content">
+              <h1>mihir</h1>
+              <h5>
+                Mihir is a 21 year old boy, who doesn't really have a preference
+                of style or colour. He is currently preparing for interviews, so
+                looks for formal clothing often.
+              </h5>
+            </div>
+          </div>
+        </label>
+
+        <!-- /.radio-card -->
+
+        <label for="radio-card-3" class="radio-card">
+          <input type="radio" name="radio-card" id="radio-card-3" />
+          <div class="card-content-wrapper">
+            <span class="check-icon"></span>
+            <div class="card-content">
+              <h1>myra</h1>
+              <h5>
+                Myra is a teenage girl. Style matters to her a lot and tries to
+                dress as fashionably as possible according to current fashion
+                trends. Her purhcase history also shows that she is a
+                sneakerhead.
+              </h5>
+            </div>
+          </div>
+        </label>
+      </div>
+      <br /><br />
+      <div class="grid-wrapper grid-col-auto" id="submit-button">
+        <button class="button-27" role="button">Select</button>
+      </div>
+      <!-- /.grid-wrapper -->
+    </div>
+    <p class="select_profile">
+      Please select a profile for the demo. Also if you wish to check the
+      profile data you could open the csv files in the project folder.
+      <br />You can alse change them accordingly to test for other usecases.
+    </p>
+    <!-- /.container -->
+  </body>
+</html>
